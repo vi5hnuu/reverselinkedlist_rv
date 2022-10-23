@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./asset/styles/styles.css">
+    <script src="./asset/js/script.js" defer></script>
+
+    <!-- fevicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./asset/fevicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./asset/fevicon//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./asset/fevicon//favicon-16x16.png">
+    <link rel="manifest" href="./asset/fevicon//site.webmanifest">
+    <title>Reverse Linked List</title>
+</head>
+
+<body>
+    <div class="algo hidden">
+        <h2>Reverse linked list</h2>
+        <h3>
+            Ex : Head -> 10 -> 20 -> 30 -> 40 -> 50 -> NULL
+        </h3>
+        <h4> Step 1 : Break the chain at node 10</h4>
+
+        <ul>
+            <li> Head -> 10 -> NULL</li>
+            <li> OldHead -> 20 -> 30 -> 40 -> 50 -> NULL</li>
+        </ul>
+        <h3>Raw Run...</h3>
+        <ol>
+            <ul>
+                <li>Head -> 10 -> NULL
+                </li>
+                <li>
+                    OldHead -> 20 -> 30 -> 40 -> 50 -> NULL
+                </li>
+            </ul>
+            <ul>
+                <li> Head -> 10 -> 20 -> NULL</li>
+                <li> OldHead -> 30 -> 40 -> 50 -> NULL</li>
+            </ul>
+            <ul>
+                <li> Head -> 10 -> 20 -> 30 -> NULL</li>
+                <li> OldHead -> 40 -> 50 -> NULL</li>
+            </ul>
+            <ul>
+                <li> Head -> 10 -> 20 -> 30 -> 40 -> NULL</li>
+                <li> OldHead -> 50 -> NULL</li>
+            </ul>
+            <ul>
+                <li> Head -> 10 -> 20 -> 30 -> 40 -> 50 -> NULL</li>
+                <li> OldHead -> NULL</li>
+            </ul>
+        </ol>
+    </div>
+    <div class="toolTip hidden">
+        <div class="toolTip-icon">⭐</div>
+        <div class="toolTip-text">Nodes Addition SucccessFull.</div>
+    </div>
+    <header class="header">
+        <p>Reverse Linked List</p>
+        <div class="header-actions">
+            <Button class="btn hover btn-addNodes">Add Nodes</Button>
+            <Button class="btn hover btn-reset">Reset</Button>
+        </div>
+    </header>
+    <main class="main">
+        <div class="chip">Algorithm</div>
+        <div class="nodes">
+            <div class="full-node">
+                <div class="node">
+                    Head
+                </div>
+                <p class="link">&#8883</p>
+            </div>
+            <!-- 
+                Insert Nodes
+
+                //sample
+                <div class="full-node">
+                    <div class="node">
+                        10
+                    </div>
+                    <p class="link">&rarr;</p>
+                </div>
+             -->
+
+            <div class="full-node">
+                <div class="node">
+                    NULL
+                </div>
+            </div>
+        </div>
+        <Button class="btn btn-reverse hover">Reverse</Button>
+    </main>
+
+
+
+    <div class="backdrop hidden"></div>
+    <div class="modal hidden">
+        <div class="info">
+            <div class="info-block">
+                <label for="nodeCount">Number Of Nodes</label>
+                <input id="nodeCount" type="number" placeholder="Enter number of nodes">
+            </div>
+            <div class="info-block">
+                <label for="nodeValues">Value Of Nodes</label>
+                <input id="nodeValues" type="text" placeholder="e.g 10 20 30 40">
+            </div>
+        </div>
+        <Button class="btn btn-submit hover">Submit</Button>
+    </div>
+</body>
+
+</html>
