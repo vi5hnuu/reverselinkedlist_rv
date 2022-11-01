@@ -150,10 +150,12 @@ btnReverse.addEventListener('click', async () => {
     for (let i = 1; i < fullNodesRefs.length - 1; i++) {
         const curNode = fullNodesRefs[i]
         curNode.firstElementChild.style.backgroundColor = 'red';
+        curNode.style.transform = 'translateY(-10px)'
         await new Promise((res, rej) => {
             setTimeout(() => {
                 nodesContainer.firstElementChild.insertAdjacentElement('afterEnd', curNode)
                 curNode.firstElementChild.style.backgroundColor = '#06283d';
+                curNode.style.transform = 'translateY(10px)'
                 res()
             }, 1000);
         })

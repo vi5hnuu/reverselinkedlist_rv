@@ -13,7 +13,7 @@ body {
 }
 
 .algo {
-  position: ab solute;
+  position: absolute;
   z-index: 10;
   left: 50%;
   top: 50%;
@@ -187,6 +187,7 @@ body {
   justify-content: space-around;
   gap: 0.5rem;
   margin-left: 0.5rem;
+  transition: all 1s;
 }
 .full-node:last-of-type {
   display: block;
