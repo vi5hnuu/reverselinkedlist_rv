@@ -10,12 +10,10 @@ window.addEventListener('resize', (evnt) => {
 function changeGridDim() {
     const nodes = document.querySelector('.nodes')
     const windowWidth = parseInt(window.document.body.clientWidth)
-    console.log(windowWidth);
 
     const dimes = nodes.getBoundingClientRect()
     const cmpStules = window.getComputedStyle(nodes);
     const scrollBarWidth = dimes.width - nodes.clientWidth
-    // console.log(cmpStules);
     let totalCols = 10
     if (windowWidth <= 400) {
         totalCols = 3
@@ -29,7 +27,6 @@ function changeGridDim() {
 
 
     const colWidth = (dimes.width - scrollBarWidth - cmpStules.padding.split('px', 1)[0] * 2) / totalCols
-    console.log(colWidth);
     nodes.style['grid-template-columns'] = `repeat(${totalCols},${colWidth}px)`
     nodes.style['grid-auto-rows'] = `${colWidth}px`
 
@@ -71,9 +68,10 @@ function toggleAlgo() {
     modal.classList.toggle('hidden')
 }
 function getValsArray(valsStr) {
-    return valsStr.split(' ').map(strVal => {
+    const arr = valsStr.split(' ').map(strVal => {
         return parseFloat(strVal)
     });
+    return arr.filter((val) => !Number.isNaN(val))
 }
 function clearInputs() {
     const nodeCount = document.getElementById('nodeCount')
@@ -90,12 +88,42 @@ btnReset.addEventListener('click', () => {
     }
     enableRevButton()
 })
+function validate(arr, count) {
+    const nodeCount = document.getElementById('nodeCount')
+    const nodeValues = document.getElementById('nodeValues')
+    if (arr.length != count) {
+        nodeValues.style.backgroundColor = '#FFD1D1';
+        nodeValues.style.borderBottom = '5px solid #f00'
+        nodeCount.style.backgroundColor = '#FFD1D1';
+        nodeCount.style.borderBottom = '5px solid #f00'
+        return false;
+    } else {
+        nodeValues.style.backgroundColor = '#fff';
+        nodeValues.style.borderBottom = '5px solid #fff'
+        nodeCount.style.backgroundColor = '#fff';
+        nodeCount.style.borderBottom = '5px solid #fff'
+        return true;
+    }
+}
 submitBtn.addEventListener('click', () => {
-    // const nodeCount = document.getElementById('nodeCount')
+    const nodeCount = document.getElementById('nodeCount')
     const nodeValues = document.getElementById('nodeValues')
     const nodeValueStr = nodeValues.value
     const vals = getValsArray(nodeValueStr)
     const nodesContainer = document.querySelector('.nodes')
+    const fullNodesRefs = document.querySelectorAll('.full-node')//not live
+    const count = Number.parseInt(nodeCount.value);
+    const oldCount = (fullNodesRefs.length - 2)
+    if (!validate(vals, count)) {
+        alert('Length / count / invalid number error.')
+        return
+    }
+    //reset default color of all nodes already in nodes container
+    fullNodesRefs.forEach(node => {
+        if (!(nodesContainer.firstElementChild == node || nodesContainer.lastElementChild == node))
+            node.firstElementChild.style.backgroundColor = '#06283d';
+    })
+    ///////////////
     vals.forEach(val => {
         const fullNode = `
                 <div class="full-node">
@@ -146,7 +174,7 @@ btnReverse.addEventListener('click', async () => {
     disableResetButton()
     const nodesContainer = document.querySelector('.nodes')
     const fullNodesRefs = document.querySelectorAll('.full-node')//not live
-    console.log(nodesContainer);
+
     for (let i = 1; i < fullNodesRefs.length - 1; i++) {
         const curNode = fullNodesRefs[i]
         curNode.firstElementChild.style.backgroundColor = 'red';
@@ -154,11 +182,11 @@ btnReverse.addEventListener('click', async () => {
         await new Promise((res, rej) => {
             setTimeout(() => {
                 nodesContainer.firstElementChild.insertAdjacentElement('afterEnd', curNode)
-                curNode.firstElementChild.style.backgroundColor = '#06283d';
-                curNode.style.transform = 'translateY(10px)'
+                curNode.style.transform = 'translateY(0px)'
                 res()
             }, 1000);
         })
+        curNode.firstElementChild.style.backgroundColor = '#0f0';
     }
     enableResetButton()
 })
